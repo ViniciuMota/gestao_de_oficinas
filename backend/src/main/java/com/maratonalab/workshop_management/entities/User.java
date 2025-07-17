@@ -1,0 +1,107 @@
+package com.maratonalab.workshop_management.entities;
+
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+@Entity
+@Table(name = "tb_user")
+public final class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    private String firstname;
+    private String lastname;
+    private String phone;
+
+    @Column(unique = true)
+    private String email;
+
+    private String address;
+    private String password;
+
+    @OneToMany(mappedBy = "owner")
+    private final List<Vehicle> vehicles = new ArrayList<>();
+
+    public User() {}
+
+    public User(String firstname, String lastname, String phone, String email, String address, String password) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.password = password;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id && Objects.equals(firstname, user.firstname) && Objects.equals(lastname, user.lastname);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstname, lastname);
+    }
+
+    public List<Vehicle> getVehicles() {
+        return vehicles;
+    }
+}
