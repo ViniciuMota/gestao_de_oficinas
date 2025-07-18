@@ -2,9 +2,7 @@ package com.maratonalab.workshop_management.entities;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name = "tb_user")
@@ -25,6 +23,9 @@ public final class User {
 
     @OneToMany(mappedBy = "owner")
     private final List<Vehicle> vehicles = new ArrayList<>();
+
+    @OneToMany(mappedBy = "client")
+    private final Set<ServiceOrder> serviceOrder = new HashSet<>();
 
     public User() {}
 
@@ -89,6 +90,14 @@ public final class User {
         this.password = password;
     }
 
+    public List<Vehicle> getVehicles() {
+        return vehicles;
+    }
+
+    public Set<ServiceOrder> getServiceOrder() {
+        return serviceOrder;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
@@ -99,9 +108,5 @@ public final class User {
     @Override
     public int hashCode() {
         return Objects.hash(id, firstname, lastname);
-    }
-
-    public List<Vehicle> getVehicles() {
-        return vehicles;
     }
 }
