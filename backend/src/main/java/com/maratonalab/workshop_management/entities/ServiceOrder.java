@@ -17,17 +17,21 @@ public final class ServiceOrder {
     private int total;
     private boolean isPaid;
 
+    @OneToOne(mappedBy = "serviceOrder", cascade = CascadeType.ALL)
+    private ProductItem productItem;
+
     // aqui, eu pretendo colocar OneToOne de Vehicle e User
     // Também seria bom um payment method (O enum já está criado)
 
     public ServiceOrder() {}
 
-    public ServiceOrder(String problemDescription, String vehicleCondition, ServiceOrderStatus status, int total, boolean isPaid) {
+    public ServiceOrder(String problemDescription, String vehicleCondition, ServiceOrderStatus status, int total, boolean isPaid, ProductItem productItem) {
         this.problemDescription = problemDescription;
         this.vehicleCondition = vehicleCondition;
         this.status = status;
         this.total = total;
         this.isPaid = isPaid;
+        this.productItem = productItem;
     }
 
     public long getId() {
@@ -72,6 +76,14 @@ public final class ServiceOrder {
 
     public void setPaid(boolean paid) {
         isPaid = paid;
+    }
+
+    public ProductItem getProductItem() {
+        return productItem;
+    }
+
+    public void setProductItem(ProductItem productItem) {
+        this.productItem = productItem;
     }
 
     @Override
