@@ -22,6 +22,9 @@ public final class Vehicle {
     @JoinColumn(name = "owner_id")
     private User owner;
 
+    @OneToOne(mappedBy = "vehicle")
+    private ServiceOrder serviceOrder;
+
     public Vehicle() {}
 
     public Vehicle(String brand, String model, int vehicleYear, String licensePlate, String chassisNumber, long currentMileage, User owner) {
@@ -86,6 +89,22 @@ public final class Vehicle {
         this.currentMileage = currentMileage;
     }
 
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
+    public ServiceOrder getServiceOrder() {
+        return serviceOrder;
+    }
+
+    public void setServiceOrder(ServiceOrder serviceOrder) {
+        this.serviceOrder = serviceOrder;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
@@ -96,14 +115,6 @@ public final class Vehicle {
     @Override
     public int hashCode() {
         return Objects.hashCode(id);
-    }
-
-    public User getOwner() {
-        return owner;
-    }
-
-    public void setOwner(User owner) {
-        this.owner = owner;
     }
 }
 
