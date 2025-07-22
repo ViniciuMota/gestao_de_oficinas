@@ -167,33 +167,33 @@ export function LoginForm({
                       7. Alterações na Política Podemos atualizar esta política.
                       Recomendamos que você a revise periodicamente. Última
                       atualização: 16/07/2025
-                    <AlertDialogTitle>
-                      Política de Privacidade
-                    </AlertDialogTitle>
+                    </AlertDialogDescription>
+
+                    <AlertDialogTitle>Política de Privacidade</AlertDialogTitle>
                     <AlertDialogDescription>
-                      Esta política explica como coletamos, usamos
-                      e protegemos suas informações.<br></br> 
-                      1. Coleta de Dados
-                      Coletamos informações como nome, e-mail, localização, e
-                      dados de uso para melhorar sua experiência.<br></br> 
-                      2. Uso dos
-                      Dados Utilizamos seus dados para: - Personalizar a
-                      experiência do usuário - Melhorar nossos serviços -
-                      Comunicar novidades e atualizações (com consentimento)<br></br> 
-                      3. Compartilhamento de Dados Não vendemos suas informações.
-                      Podemos compartilhar dados com parceiros de tecnologia
-                      para funcionamento do app.<br></br> 
-                      4. Segurança Adotamos medidas
-                      técnicas para proteger seus dados.<br></br> 
-                      5. Seus Direitos Você
-                      pode acessar, corrigir ou excluir seus dados entrando em
-                      contato conosco pelo e-mail: [seu-email].<br></br> 
-                      6. Cookies e
-                      Tecnologias Utilizamos cookies e ferramentas de análise
-                      para entender o comportamento do usuário.<br></br> 
-                      7. Alterações na
-                      Política Podemos atualizar esta política. Recomendamos que
-                      você a revise periodicamente. Última atualização: 16/07/2025
+                      Esta política explica como coletamos, usamos e protegemos
+                      suas informações.<br></br>
+                      1. Coleta de Dados Coletamos informações como nome,
+                      e-mail, localização, e dados de uso para melhorar sua
+                      experiência.<br></br>
+                      2. Uso dos Dados Utilizamos seus dados para: -
+                      Personalizar a experiência do usuário - Melhorar nossos
+                      serviços - Comunicar novidades e atualizações (com
+                      consentimento)<br></br>
+                      3. Compartilhamento de Dados Não vendemos suas
+                      informações. Podemos compartilhar dados com parceiros de
+                      tecnologia para funcionamento do app.<br></br>
+                      4. Segurança Adotamos medidas técnicas para proteger seus
+                      dados.<br></br>
+                      5. Seus Direitos Você pode acessar, corrigir ou excluir
+                      seus dados entrando em contato conosco pelo e-mail:
+                      [seu-email].<br></br>
+                      6. Cookies e Tecnologias Utilizamos cookies e ferramentas
+                      de análise para entender o comportamento do usuário.
+                      <br></br>
+                      7. Alterações na Política Podemos atualizar esta política.
+                      Recomendamos que você a revise periodicamente. Última
+                      atualização: 16/07/2025
                     </AlertDialogDescription>
                   </AlertDialogHeader>
                   <AlertDialogFooter>
@@ -204,7 +204,14 @@ export function LoginForm({
             </div>
           </form>
           <div className="bg-muted relative hidden md:block h-2">
-            <Image src="/imglogin.jpg" alt="imagemlado" height={2} width={1} layout="responsive"></Image>
+            <Image
+              src="/imglogin.jpg"
+              alt="imagemlado"
+              height={2}
+              width={1}
+              layout="responsive"
+            ></Image>
+          </div>
           <div className="bg-muted relative hidden md:block">
             <img
               src="/login.svg"
