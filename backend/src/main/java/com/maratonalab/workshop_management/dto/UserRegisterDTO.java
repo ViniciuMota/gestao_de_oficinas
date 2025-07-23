@@ -1,4 +1,4 @@
-package com.maratonalab.workshop_management.entities.dto;
+package com.maratonalab.workshop_management.dto;
 
 public final class UserRegisterDTO {
     private long id;
@@ -12,8 +12,7 @@ public final class UserRegisterDTO {
 
     public UserRegisterDTO() {}
 
-    public UserRegisterDTO(long id, String firstname, String lastname, String phone, String email, String address, String password) {
-        this.id = id;
+    public UserRegisterDTO(String firstname, String lastname, String phone, String email, String address, String password) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.phone = phone;
