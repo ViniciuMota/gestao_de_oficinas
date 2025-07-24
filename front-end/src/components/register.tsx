@@ -1,5 +1,5 @@
 "use client"
-
+import { useState, ComponentProps } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
@@ -12,6 +12,9 @@ export function RegisterForm({
     className,
     ...props
 }: React.ComponentProps<"div">) {
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [error, setError] = useState<string | null>(null);
     return (
         <div className={cn("flex flex-col gap-4", className)} {...props}>
             <Card className="overflow-hidden p-0">
@@ -36,7 +39,7 @@ export function RegisterForm({
                                     <Input id="email" type="email" placeholder="seu@email.com" required />
                                 </div>
                                 <div className="grid gap-2">
-                                    <Label htmlFor="phone">Telefone Celular</Label>
+                                    <Label htmlFor="phone">Celular</Label>
                                     <InputMask
                                         id="phone"
                                         component={Input}
@@ -45,12 +48,8 @@ export function RegisterForm({
                                         mask="(__) _____-____"
                                         replacement={{ _: /\d/ }}
                                         pattern="\(\d{2}\) \d{5}-\d{4}"
-                                        title="Por favor digite um telefone válido"
+                                        title="Por favor digite um número válido"
                                     />
-                                </div>
-                                <div className="grid gap-2">
-                                    <Label htmlFor="address">Endereço</Label>
-                                    <Input id="address" placeholder="Seu endereço" required />
                                 </div>
                                 <div className="grid gap-2">
                                     <Label htmlFor="password">Senha</Label>
