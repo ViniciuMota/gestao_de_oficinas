@@ -1,11 +1,9 @@
 package com.maratonalab.workshop_management.services;
 
-import com.maratonalab.workshop_management.dto.UserRegisterDTO;
 import com.maratonalab.workshop_management.entities.User;
 import com.maratonalab.workshop_management.dto.UserDTO;
 import com.maratonalab.workshop_management.repositories.UserRepository;
 import com.maratonalab.workshop_management.services.exceptions.ResourceNotFoundException;
-import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
