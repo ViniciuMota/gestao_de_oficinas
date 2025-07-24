@@ -25,7 +25,6 @@ export function RegisterForm({
             return;
         }
 
-        // 2. Validação de força da senha
         if (password.length < 8) {
             setError("A senha deve ter no mínimo 8 caracteres.");
             return;
