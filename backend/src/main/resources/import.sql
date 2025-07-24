@@ -1,6 +1,6 @@
 -- Usuários
-INSERT INTO tb_user(firstname, lastname, phone, email, address, password) VALUES ('Luiz', 'Monteiro', '9499994444', 'luiz@test.com', 'Rua XX, Cidade XX', '123456');
-INSERT INTO tb_user(firstname, lastname, phone, email, address, password) VALUES ('Ana', 'Oliveira', '9488883333', 'ana@test.com', 'Rua YY, Cidade XX', '123456');
+INSERT INTO tb_user(firstname, lastname, phone, email, password) VALUES ('Luiz', 'Monteiro', '9499994444', 'luiz@test.com', '123456');
+INSERT INTO tb_user(firstname, lastname, phone, email, password) VALUES ('Ana', 'Oliveira', '9488883333', 'ana@test.com', '123456');
 
 -- Veículos
 INSERT INTO tb_vehicle(brand, model, vehicle_year, license_plate, chassis_number, current_mileage, owner_id) VALUES ('Toyota', 'Corolla', 2020, 'ABC-1234', '9BWZZ377VT004251', 45000, 1);

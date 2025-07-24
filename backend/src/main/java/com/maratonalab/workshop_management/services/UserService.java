@@ -1,5 +1,6 @@
 package com.maratonalab.workshop_management.services;
 
+import com.maratonalab.workshop_management.dto.UserRegisterDTO;
 import com.maratonalab.workshop_management.entities.User;
 import com.maratonalab.workshop_management.dto.UserDTO;
 import com.maratonalab.workshop_management.repositories.UserRepository;
@@ -33,7 +34,9 @@ public class UserService {
     }
 
     @Transactional
-    public void insert() {
-
+    public UserRegisterDTO insert(UserRegisterDTO dto) {
+        User user = modelMapper.map(dto, User.class);
+        user = repository.save(user);
+        return modelMapper.map(user, UserRegisterDTO.class);
     }
 }

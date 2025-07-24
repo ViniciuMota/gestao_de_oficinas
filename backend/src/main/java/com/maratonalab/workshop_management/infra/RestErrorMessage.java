@@ -2,7 +2,7 @@ package com.maratonalab.workshop_management.infra;
 
 import org.springframework.http.HttpStatus;
 
-public final class RestErrorMessage {
+public class RestErrorMessage {
     private HttpStatus status;
     private String message;
 
