@@ -18,7 +18,6 @@ public final class User {
     @Column(unique = true)
     private String email;
 
-    private String address;
     private String password;
 
     @OneToMany(mappedBy = "owner")
@@ -29,12 +28,11 @@ public final class User {
 
     public User() {}
 
-    public User(String firstname, String lastname, String phone, String email, String address, String password) {
+    public User(String firstname, String lastname, String phone, String email, String password) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.phone = phone;
         this.email = email;
-        this.address = address;
         this.password = password;
     }
 
@@ -73,15 +71,6 @@ public final class User {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     public String getPassword() {
         return password;
     }

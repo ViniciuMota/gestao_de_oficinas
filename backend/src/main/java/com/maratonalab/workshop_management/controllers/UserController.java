@@ -1,4 +1,4 @@
-package com.maratonalab.workshop_management.controller;
+package com.maratonalab.workshop_management.controllers;
 
 import com.maratonalab.workshop_management.dto.UserDTO;
 import com.maratonalab.workshop_management.services.UserService;
@@ -24,13 +24,12 @@ public class UserController {
         return ResponseEntity.ok(userService.findAll(pageable));
     }
 
+    // o RestExceptionHandler cuida das exceções que o Spring captura
     @GetMapping("/{id}")
     public ResponseEntity<UserDTO> findById(@PathVariable Long id) {
-        try {
             UserDTO user = userService.findById(id);
             return ResponseEntity.ok().body(user);
-        } catch (ResourceNotFoundException e) {
-            return ResponseEntity.notFound().build();
-        }
     }
+
+
 }

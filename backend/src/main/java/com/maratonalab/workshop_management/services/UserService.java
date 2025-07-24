@@ -26,9 +26,14 @@ public class UserService {
         return users.map(user -> modelMapper.map(user, UserDTO.class));
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public UserDTO findById(long id) {
         User user = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Usuário com id: " + id + " não existe"));
         return modelMapper.map(user, UserDTO.class);
+    }
+
+    @Transactional
+    public void insert() {
+
     }
 }
