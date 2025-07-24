@@ -59,7 +59,7 @@ export function RegisterForm({
                                 <Button type="submit" className="w-full">
                                     Criar conta
                                 </Button>
-                                <div className="mt-4 text-center text-sm">
+                                <div className="text-center text-sm">
                                     Já tem uma conta?{" "}
                                     <Link href="/login" className="underline">
                                         Faça login
