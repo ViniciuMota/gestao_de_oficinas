@@ -2,13 +2,9 @@
 
 import { useState, useEffect } from "react";
 import confetti from "canvas-confetti";
-import { Button } from "@/components/ui/button";
 
-export function ConfettiStars() {
-  const [showAlert, setShowAlert] = useState(false);
-  const [visible, setVisible] = useState(false);
-
-  const handleClick = () => {
+export function ConfettiAnimation() {
+  useEffect(() => {
     const defaults = {
       spread: 360,
       ticks: 100,
@@ -37,39 +33,46 @@ export function ConfettiStars() {
     setTimeout(shoot, 0);
     setTimeout(shoot, 20);
     setTimeout(shoot, 40);
+  }, []);
 
-    setShowAlert(true);
-    setVisible(true);
-  };
+  return null;
+}
+
+interface SuccessToastProps {
+  show: boolean;
+  onClose: () => void;
+}
+
+export function SuccessToast({ show, onClose }: SuccessToastProps) {
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    if (showAlert) {
-      const timeout1 = setTimeout(() => setVisible(false), 2700);
-      const timeout2 = setTimeout(() => setShowAlert(false), 3000);
+    if (show) {
+      setVisible(true);
+      const fadeOutTimer = setTimeout(() => setVisible(false), 2700);
+      const removeTimer = setTimeout(() => onClose(), 3000);
       return () => {
-        clearTimeout(timeout1);
-        clearTimeout(timeout2);
+        clearTimeout(fadeOutTimer);
+        clearTimeout(removeTimer);
       };
     }
-  }, [showAlert]);
+  }, [show, onClose]);
+
+  if (!show) {
+    return null;
+  }
 
   return (
-    <div className="relative">
-      <Button onClick={handleClick} type="submit">Receber Desconto</Button>
-
-      {showAlert && (
-        <div className="fixed bottom-5 right-5 z-50">
-          <div
-            className={`bg-white text-black border-gray-500 rounded-lg shadow-lg border-2 brightness-125 p-10 max-w-xs
-              transition-all duration-300 ease-in-out
-              ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
-            role="alert"
-          >
-            <h1 className="text-sm font-semibold">Cadastrado com sucesso. ✅🌟</h1>
-            <h3>seu desconto sera liberado em breve...</h3>
-          </div>
-        </div>
-      )}
+    <div className="fixed bottom-5 right-5 z-50">
+      <div
+        className={`bg-white text-black border-gray-500 rounded-lg shadow-lg border-2 brightness-125 p-10 max-w-xs
+          transition-all duration-300 ease-in-out
+          ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+        role="alert"
+      >
+        <h1 className="text-sm font-semibold">Cadastrado com sucesso. ✅🌟</h1>
+        <h3>seu desconto sera liberado em breve...</h3>
+      </div>
     </div>
   );
 }
