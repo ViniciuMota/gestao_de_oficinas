@@ -1,23 +1,37 @@
 package com.maratonalab.workshop_management.dto;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 public final class UserRegisterDTO {
     private long id;
 
+    @Size(min = 3, max = 80, message = "Nome deve ter entre 3 a 80 caracteres")
+    @NotBlank(message = "Campo requerido")
     private String firstname;
+
+    @Size(min = 3, max = 80, message = "Sobrenome deve ter entre 3 a 80 caracteres")
+    @NotBlank(message = "Campo requerido")
     private String lastname;
+
+    @NotBlank(message = "Campo requerido")
     private String phone;
+
+    @Email
+    @NotBlank(message = "Campo requerido")
     private String email;
-    private String address;
+
+    @NotBlank(message = "Campo requerido")
     private String password;
 
     public UserRegisterDTO() {}
 
-    public UserRegisterDTO(String firstname, String lastname, String phone, String email, String address, String password) {
+    public UserRegisterDTO(String firstname, String lastname, String phone, String email, String password) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.phone = phone;
         this.email = email;
-        this.address = address;
         this.password = password;
     }
 
@@ -59,14 +73,6 @@ public final class UserRegisterDTO {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public String getPassword() {

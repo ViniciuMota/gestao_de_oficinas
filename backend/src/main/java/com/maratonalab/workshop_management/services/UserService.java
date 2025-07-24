@@ -5,7 +5,6 @@ import com.maratonalab.workshop_management.entities.User;
 import com.maratonalab.workshop_management.dto.UserDTO;
 import com.maratonalab.workshop_management.repositories.UserRepository;
 import com.maratonalab.workshop_management.services.exceptions.ResourceNotFoundException;
-import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -28,9 +27,16 @@ public class UserService {
         return users.map(user -> modelMapper.map(user, UserDTO.class));
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public UserDTO findById(long id) {
         User user = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Usuário com id: " + id + " não existe"));
         return modelMapper.map(user, UserDTO.class);
+    }
+
+    @Transactional
+    public UserRegisterDTO insert(UserRegisterDTO dto) {
+        User user = modelMapper.map(dto, User.class);
+        user = repository.save(user);
+        return modelMapper.map(user, UserRegisterDTO.class);
     }
 }
