@@ -5,30 +5,32 @@ import jakarta.persistence.*;
 import java.util.*;
 
 @Entity
-@Table(name = "tb_user")
-public final class User {
+@Table(name = "tb_client")
+public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private String firstname;
     private String lastname;
+
+    @Column(unique = true)
     private String phone;
 
     @Column(unique = true)
     private String email;
 
-    private String password;
+    @OneToMany(mappedBy = "owner")
+    private final List<Vehicle> vehicles = new ArrayList<>();
 
+    @OneToMany(mappedBy = "client")
+    private final Set<ServiceOrder> serviceOrder = new HashSet<>();
 
-    public User() {}
-
-    public User(String firstname, String lastname, String phone, String email, String password) {
+    public Client(String firstname, String lastname, String phone, String email) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.phone = phone;
         this.email = email;
-        this.password = password;
     }
 
     public long getId() {
@@ -66,23 +68,24 @@ public final class User {
     public void setEmail(String email) {
         this.email = email;
     }
-    public String getPassword() {
-        return password;
+
+    public List<Vehicle> getVehicles() {
+        return vehicles;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public Set<ServiceOrder> getServiceOrder() {
+        return serviceOrder;
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return id == user.id && Objects.equals(firstname, user.firstname) && Objects.equals(lastname, user.lastname);
+        Client client = (Client) o;
+        return id == client.id && Objects.equals(email, client.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstname, lastname);
+        return Objects.hash(id, email);
     }
 }
