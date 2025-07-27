@@ -20,6 +20,7 @@ public class Client {
     @Column(unique = true)
     private String email;
 
+
     @OneToMany(mappedBy = "owner")
     private final List<Vehicle> vehicles = new ArrayList<>();
 
