@@ -2,7 +2,13 @@ package com.maratonalab.workshop_management.entities;
 
 import jakarta.persistence.*;
 
+
 import java.util.*;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_client")
@@ -14,12 +20,10 @@ public class Client {
     private String firstname;
     private String lastname;
 
-    @Column(unique = true)
     private String phone;
 
     @Column(unique = true)
     private String email;
-
 
     @OneToMany(mappedBy = "owner")
     private final List<Vehicle> vehicles = new ArrayList<>();
