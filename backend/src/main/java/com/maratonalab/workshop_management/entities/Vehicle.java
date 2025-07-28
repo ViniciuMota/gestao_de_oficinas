@@ -20,14 +20,14 @@ public final class Vehicle {
 
     @ManyToOne
     @JoinColumn(name = "owner_id")
-    private User owner;
+    private Client owner;
 
     @OneToOne(mappedBy = "vehicle")
     private ServiceOrder serviceOrder;
 
     public Vehicle() {}
 
-    public Vehicle(String brand, String model, int vehicleYear, String licensePlate, String chassisNumber, long currentMileage, User owner) {
+    public Vehicle(String brand, String model, int vehicleYear, String licensePlate, String chassisNumber, long currentMileage, Client owner) {
         this.brand = brand;
         this.model = model;
         this.vehicleYear = vehicleYear;
@@ -89,11 +89,11 @@ public final class Vehicle {
         this.currentMileage = currentMileage;
     }
 
-    public User getOwner() {
+    public Client getOwner() {
         return owner;
     }
 
-    public void setOwner(User owner) {
+    public void setOwner(Client owner) {
         this.owner = owner;
     }
 

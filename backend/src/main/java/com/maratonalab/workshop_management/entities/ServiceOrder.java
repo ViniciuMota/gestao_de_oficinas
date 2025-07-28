@@ -21,7 +21,7 @@ public final class ServiceOrder {
 
     @ManyToOne
     @JoinColumn(name = "client_id")
-    private User client;
+    private Client client;
 
     @OneToOne
     @JoinColumn(name = "vehicle_id")
@@ -37,7 +37,7 @@ public final class ServiceOrder {
 
     public ServiceOrder() {}
 
-    public ServiceOrder(String problemDescription, String vehicleCondition, ServiceOrderStatus status, int total, boolean isPaid, User client, Vehicle vehicle) {
+    public ServiceOrder(String problemDescription, String vehicleCondition, ServiceOrderStatus status, int total, boolean isPaid, Client client, Vehicle vehicle) {
         this.problemDescription = problemDescription;
         this.vehicleCondition = vehicleCondition;
         this.status = status;
@@ -95,11 +95,11 @@ public final class ServiceOrder {
         return productItem;
     }
 
-    public User getClient() {
+    public Client getClient() {
         return client;
     }
 
-    public void setClient(User client) {
+    public void setClient(Client client) {
         this.client = client;
     }
 
