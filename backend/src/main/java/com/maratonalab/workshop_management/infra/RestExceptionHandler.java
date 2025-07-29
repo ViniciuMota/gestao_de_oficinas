@@ -16,6 +16,12 @@ public final class RestExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(threatResponse);
     }
 
+    @ExceptionHandler(IllegalStateException.class)
+    private ResponseEntity<RestErrorMessage> illegalStateHandler(IllegalStateException exception) {
+        RestErrorMessage threatResponse = new RestErrorMessage(HttpStatus.UNAUTHORIZED, exception.getMessage());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(threatResponse);
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     private ResponseEntity<RestErrorMessage> methodArgumentNotValidHandler(MethodArgumentNotValidException exception) {
         ValidationError threatResponse = new ValidationError(HttpStatus.UNPROCESSABLE_ENTITY, "Dados inválidos");
