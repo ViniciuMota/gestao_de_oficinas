@@ -5,10 +5,7 @@ import jakarta.persistence.*;
 
 import java.util.*;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+
 
 @Entity
 @Table(name = "tb_client")
@@ -30,6 +27,7 @@ public class Client {
 
     @OneToMany(mappedBy = "client")
     private final Set<ServiceOrder> serviceOrder = new HashSet<>();
+
 
     public Client(String firstname, String lastname, String phone, String email) {
         this.firstname = firstname;
@@ -93,4 +91,5 @@ public class Client {
     public int hashCode() {
         return Objects.hash(id, email);
     }
+
 }
