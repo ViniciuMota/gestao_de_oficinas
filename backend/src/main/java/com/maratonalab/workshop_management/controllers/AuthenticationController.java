@@ -1,8 +1,10 @@
 package com.maratonalab.workshop_management.controllers;
 
 import com.maratonalab.workshop_management.dto.LoginDTO;
+import com.maratonalab.workshop_management.dto.LoginResponseDTO;
 import com.maratonalab.workshop_management.dto.RegisterDTO;
 import com.maratonalab.workshop_management.entities.User;
+import com.maratonalab.workshop_management.infra.security.TokenService;
 import com.maratonalab.workshop_management.repositories.UserRepository;
 
 import com.maratonalab.workshop_management.services.AuthenticationService;
@@ -30,22 +32,27 @@ public class AuthenticationController {
     private UserRepository repository;
 
     @Autowired
-    private AuthenticationService service;
+    private AuthenticationService authenticationService;
+
+    @Autowired
+    private TokenService tokenService;
 
     @PostMapping("/login")
-    public ResponseEntity<Void> login(@RequestBody @Valid LoginDTO data) {
+    public ResponseEntity<LoginResponseDTO> login(@RequestBody @Valid LoginDTO data) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.getEmail(), data.getPassword());
         var auth = manager.authenticate(usernamePassword);
 
-        return ResponseEntity.ok().build();
+        var token = tokenService.generateToken((User) auth.getPrincipal());
+
+        return ResponseEntity.ok(new LoginResponseDTO(token));
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody @Valid RegisterDTO data) {
+    public ResponseEntity<Void> register(@RequestBody @Valid RegisterDTO data) {
         if (repository.findByEmail(data.getEmail()) != null) return ResponseEntity.badRequest().build();
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.getPassword());
-        service.save(data, encryptedPassword);
+        authenticationService.save(data, encryptedPassword);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(data.getId()).toUri();
