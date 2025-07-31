@@ -28,12 +28,13 @@ public final class User implements UserDetails {
 
     public User() {}
 
-    public User(String firstname, String lastname, String phone, String email, String password) {
+    public User(String firstname, String lastname, String phone, String email, String password, UserRole role) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.phone = phone;
         this.email = email;
         this.password = password;
+        this.role = role;
     }
 
     public long getId() {
@@ -70,6 +71,10 @@ public final class User implements UserDetails {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public UserRole getRole() {
+        return role;
     }
 
     @Override

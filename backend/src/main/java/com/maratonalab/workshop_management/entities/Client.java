@@ -2,10 +2,10 @@ package com.maratonalab.workshop_management.entities;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+
+import java.util.*;
+
+
 
 @Entity
 @Table(name = "tb_client")
@@ -13,6 +13,7 @@ public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private String firstname;
     private String lastname;
 
@@ -78,4 +79,17 @@ public class Client {
     public Set<ServiceOrder> getServiceOrder() {
         return serviceOrder;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Client client = (Client) o;
+        return id == client.id && Objects.equals(email, client.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, email);
+    }
+
 }
