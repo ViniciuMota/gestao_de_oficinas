@@ -1,9 +1,8 @@
 package com.maratonalab.workshop_management.controllers;
 
 import com.maratonalab.workshop_management.dto.UserDTO;
-import com.maratonalab.workshop_management.dto.UserRegisterDTO;
+import com.maratonalab.workshop_management.dto.RegisterDTO;
 import com.maratonalab.workshop_management.services.UserService;
-import com.maratonalab.workshop_management.services.exceptions.ResourceNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -30,13 +29,5 @@ public class UserController {
     public ResponseEntity<UserDTO> findById(@PathVariable Long id) {
             UserDTO user = userService.findById(id);
             return ResponseEntity.ok().body(user);
-    }
-
-    @PostMapping
-    public ResponseEntity<UserRegisterDTO> insert(@Valid @RequestBody UserRegisterDTO dto) {
-        dto = userService.insert(dto);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(dto.getId()).toUri();
-        return ResponseEntity.created(uri).body(dto);
     }
 }
