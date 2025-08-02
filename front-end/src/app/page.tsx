@@ -14,20 +14,7 @@ export default function Home() {
       <FeaturesSection />
       <StatsSection />
       <CallToAction />
-      <div>
-        <div className="bg-amber-200 flex justify-center items-center gap-2 p-2">
-          Acesse a versão beta do app{" "}
-          <Button>
-            <a href="/login">Teste já</a>
-          </Button>
-        </div>
-        <div className="bg-amber-200 flex justify-center items-center gap-2 p-2">
-          Olhe como vai ficar a organização da oficina{" "}
-          <Button>
-            <a href="/dashboard">Ver exemplo</a>
-          </Button>
-        </div>
-      </div>
+
       <FooterSection />
     </main>
   );

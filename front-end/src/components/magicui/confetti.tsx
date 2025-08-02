@@ -71,7 +71,7 @@ export function SuccessToast({ show, onClose }: SuccessToastProps) {
         role="alert"
       >
         <h1 className="text-sm font-semibold">Cadastrado com sucesso. ✅🌟</h1>
-        <h3>seu desconto sera liberado em breve...</h3>
+        <h3>seu acesso e seu desconto sera liberado em breve...</h3>
       </div>
     </div>
   );

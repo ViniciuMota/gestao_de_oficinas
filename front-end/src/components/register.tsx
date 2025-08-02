@@ -8,16 +8,23 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { InputMask } from "@react-input/mask";
 import Image from "next/image";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 export function RegisterForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const router = useRouter();
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setError(null);
 
@@ -39,7 +46,28 @@ export function RegisterForm({
       return;
     }
 
-    alert("Conta criada com sucesso!");
+    try {
+      const response = await axios.post(
+        "https://workshop-management-fhuo.onrender.com/api/auth/register",
+        {
+          firstname: firstName,
+          lastname: lastName,
+          phone,
+          email,
+          password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      alert("Conta criada com sucesso! aguarde a validação para acessar o app!.");
+      router.push("/login");
+    } catch (error: any) {
+      console.error(error.response?.data || error.message);
+      setError("Erro ao criar conta. Tente novamente mais tarde.");
+    }
   };
 
   return (
@@ -55,11 +83,23 @@ export function RegisterForm({
               <div className="grid gap-4">
                 <div className="grid gap-2">
                   <Label htmlFor="first-name">Nome</Label>
-                  <Input id="first-name" placeholder="Nome" required />
+                  <Input
+                    id="first-name"
+                    placeholder="Nome"
+                    required
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                  />
                 </div>
                 <div className="grid gap-2">
                   <Label htmlFor="last-name">Sobrenome</Label>
-                  <Input id="last-name" placeholder="Sobrenome" required />
+                  <Input
+                    id="last-name"
+                    placeholder="Sobrenome"
+                    required
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                  />
                 </div>
                 <div className="grid gap-2">
                   <Label htmlFor="email">Email</Label>
@@ -68,6 +108,8 @@ export function RegisterForm({
                     type="email"
                     placeholder="seu@email.com"
                     required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
                 <div className="grid gap-2">
@@ -81,6 +123,8 @@ export function RegisterForm({
                     replacement={{ _: /\d/ }}
                     pattern="\(\d{2}\) \d{5}-\d{4}"
                     title="Por favor digite um número válido"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
                   />
                 </div>
                 <div className="grid gap-2">

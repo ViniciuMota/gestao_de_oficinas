@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ConfettiAnimation, SuccessToast } from "./magicui/confetti";
 import { AuroraText } from "./magicui/aurora-text";
+import { newEmail } from "@/hooks/email";
 
 export default function CallToAction() {
   const [email, setEmail] = useState("");
@@ -17,9 +18,8 @@ export default function CallToAction() {
     if (emailRegex.test(email)) {
       console.log("E-mail válido, enviando:", email);
       setIsSubmitted(true);
-      // Futuramente, aqui você faria a chamada para a API
-      // e talvez limparia o campo de e-mail:
-      // setEmail("");
+      newEmail(email);
+      setEmail("");
     } else {
       alert("Por favor, insira um formato de e-mail válido.");
     }

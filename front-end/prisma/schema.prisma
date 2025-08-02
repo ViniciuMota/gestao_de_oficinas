@@ -1,0 +1,80 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model tb_client {
+  id               BigInt             @id @default(autoincrement())
+  email            String?            @unique(map: "uktbu74oe5ntiego6pu36jfokha") @db.VarChar(255)
+  firstname        String?            @db.VarChar(255)
+  lastname         String?            @db.VarChar(255)
+  phone            String?            @db.VarChar(255)
+  tb_service_order tb_service_order[]
+  tb_vehicle       tb_vehicle[]
+}
+
+model tb_product_item {
+  id               BigInt            @id @default(autoincrement())
+  name             String?           @db.VarChar(255)
+  unit_price       Float
+  service_order_id BigInt?
+  tb_service_order tb_service_order? @relation(fields: [service_order_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk9lui7vpqtjjhpyfhqls4acw0r")
+}
+
+model tb_service_item {
+  id               BigInt            @id @default(autoincrement())
+  name             String?           @db.VarChar(255)
+  unit_price       Float
+  service_order_id BigInt?           @unique(map: "ukfmw6bqx5uro6kukdtcpa093tt")
+  tb_service_order tb_service_order? @relation(fields: [service_order_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fkik9j9017gwcq12y81s8yvyx39")
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model tb_service_order {
+  id                  BigInt            @id @default(autoincrement())
+  is_paid             Boolean
+  problem_description String?           @db.VarChar(255)
+  status              Int?              @db.SmallInt
+  total               Int
+  vehicle_condition   String?           @db.VarChar(255)
+  client_id           BigInt?
+  vehicle_id          BigInt?           @unique(map: "ukoplwpg7kg4hf2o41k3c5c9kx1")
+  tb_product_item     tb_product_item[]
+  tb_service_item     tb_service_item?
+  tb_client           tb_client?        @relation(fields: [client_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk1fkjk6nljrc5n1uog8e2hevlw")
+  tb_vehicle          tb_vehicle?       @relation(fields: [vehicle_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fks050bdgl55ojhgww1brl21njh")
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model tb_user {
+  id        BigInt  @id @default(autoincrement())
+  email     String? @unique(map: "uk4vih17mube9j7cqyjlfbcrk4m") @db.VarChar(255)
+  firstname String? @db.VarChar(255)
+  lastname  String? @db.VarChar(255)
+  password  String? @db.VarChar(255)
+  phone     String? @db.VarChar(255)
+  role      Int?    @db.SmallInt
+}
+
+model tb_vehicle {
+  id               BigInt            @id @default(autoincrement())
+  brand            String?           @db.VarChar(255)
+  chassis_number   String?           @db.VarChar(255)
+  current_mileage  BigInt
+  license_plate    String?           @db.VarChar(255)
+  model            String?           @db.VarChar(255)
+  vehicle_year     Int
+  owner_id         BigInt?
+  tb_service_order tb_service_order?
+  tb_client        tb_client?        @relation(fields: [owner_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk4sjvmr5s36riuy8ijyity0jxy")
+}
+
+model promotional_email{
+  id       BigInt  @id @default(autoincrement())
+  email     String? @unique @db.VarChar(255)
+}
