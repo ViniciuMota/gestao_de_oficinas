@@ -25,3 +25,11 @@ Estamos abertos a contribuições! Se você deseja ajudar no desenvolvimento des
 2.  **Crie um branch para sua funcionalidade:** `git checkout -b minha-funcionalidade`
 3.  **Faça suas alterações e adicione testes (se aplicável).**
 4.  **Submeta um Pull Request.**
+
+<br/>
+
+<div align="center">
+  <h2>Projeto Atualmente</h2>
+  <h3>Link: 🔗 [Acesse o projeto online](https://gestao-de-oficinas.vercel.app/)</h3>
+  <img src="https://github.com/Alexandrexy1/project-photo/blob/main/screencapture-gestao-de-oficinas-vercel-app-2025-08-03-08_45_42.png" width="600"/>
+</div>
